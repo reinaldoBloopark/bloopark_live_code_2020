@@ -1,11 +1,15 @@
+# -*- coding: utf-8 -*-
 import unittest
 from main import overlap
 from main import find_overlaps
 
-class TestLineOverlap(unittest.TestCase):
+
+class TestOverlap(unittest.TestCase):
+    """Test for overlap functions."""
 
     @classmethod
     def setUpClass(cls):
+        """Set up variable for tests."""
         cls.l1 = (1, 8)
         cls.l2 = (2, 6)
 
@@ -28,19 +32,20 @@ class TestLineOverlap(unittest.TestCase):
         cls.response_2 = []
 
     def test_overlap_ok(self):
-
+        """Test 1 of overlap function."""
         self.assertTrue(overlap(self.l1, self.l2))
         self.assertTrue(overlap(self.l5, self.l6))
 
     def test_overlap_not_ok(self):
+        """Test 2 of overlap function."""
         self.assertFalse(overlap(self.l3, self.l4))
 
     def test_find_overlaps_ok(self):
-
+        """Test 1 of find_overlaps function."""
         self.assertEqual(find_overlaps(self.to_test), self.response)
 
     def test_find_overlaps_not_ok(self):
-
+        """Test 2 of find_overlaps function."""
         self.assertEqual(find_overlaps(self.to_test_2), self.response_2)
 
 if __name__ == '__main__':
