@@ -22,6 +22,11 @@ class TestLineOverlap(unittest.TestCase):
             'D': (6, 9)}
         cls.response = [('A', 'B'), ('A', 'D'), ('B', 'D')]
 
+        cls.to_test_2 = {
+            'A': (1, 10),
+            'B': (15, 11)}
+        cls.response_2 = []
+
     def test_overlap_ok(self):
 
         self.assertTrue(overlap(self.l1, self.l2))
@@ -30,9 +35,13 @@ class TestLineOverlap(unittest.TestCase):
     def test_overlap_not_ok(self):
         self.assertFalse(overlap(self.l3, self.l4))
 
-    def test_find_overlaps_not_ok(self):
+    def test_find_overlaps_ok(self):
 
         self.assertEqual(find_overlaps(self.to_test), self.response)
+
+    def test_find_overlaps_not_ok(self):
+
+        self.assertEqual(find_overlaps(self.to_test_2), self.response_2)
 
 if __name__ == '__main__':
     unittest.main()
