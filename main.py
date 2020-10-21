@@ -9,8 +9,31 @@ def overlap(l1, l2):
       If one line starts in the same point that the other ends is considered
       overlapping.
     """
-    pass
 
+    result = False
+
+    # get x1 and x2
+    x1, x2 = l1
+    x3, x4 = l2
+
+    # algorithm
+    # we are going to test if x1 is in [x3,x4], if it is correct we return True
+    # same thing with x2 if x2 is in [x3, x4] we return True
+    # otherwise we return False
+
+    if x1 >= x3 and x1 <= x4:
+      return True
+
+    if x2 >= x3 and x2 <= x4:
+      return True
+
+    if x3 >= x1 and x3 <= x2:
+      return True
+
+    if x4 >= x1 and x4 <= x2:
+      return True
+
+    return result
 
 def find_overlaps(lines):
     """
@@ -30,4 +53,34 @@ def find_overlaps(lines):
         }
         output => [('A', 'B'), ('A', 'D'), ('B', 'D')]
     """
-    pass
+
+    # the variable to be return
+    output = []
+
+    # we create a list of keys already used
+    keys_already_used = []
+
+    # loop all the elt in dictionnary
+    for key_to_loop in lines.keys():
+
+      # get the first tuple
+      l1 = lines[key_to_loop]
+
+      for key_line in lines:
+
+        # if key have already been used we skip
+        # or if it is the same key we skip
+        if key_line in keys_already_used or key_line == key_to_loop:
+          continue
+
+        # get the key of the line
+        l2 = lines[key_line]
+
+        # if the l1 and l2 overlap, we add it inside the output list
+        if overlap(l1, l2):
+          output.append((key_to_loop, key_line))
+
+      # we add this key in key already looped
+      keys_already_used.append(key_to_loop)
+
+    return output
