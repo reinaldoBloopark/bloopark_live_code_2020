@@ -10,8 +10,6 @@ def overlap(l1, l2):
       overlapping.
     """
 
-    result = False
-
     # get x1 and x2
     x1, x2 = l1
     x3, x4 = l2
@@ -33,7 +31,7 @@ def overlap(l1, l2):
     if x4 >= x1 and x4 <= x2:
       return True
 
-    return result
+    return False
 
 def find_overlaps(lines):
     """
@@ -54,13 +52,14 @@ def find_overlaps(lines):
         output => [('A', 'B'), ('A', 'D'), ('B', 'D')]
     """
 
-    # the variable to be return
+    """
+      output: the variable to be return
+      keys_already_used: the variable we use to keep track of already used key
+    """
     output = []
-
-    # we create a list of keys already used
     keys_already_used = []
 
-    # loop all the elt in dictionnary
+    # loop all the element in dictionnary
     for key_to_loop in lines.keys():
 
       # get the first tuple
@@ -68,12 +67,12 @@ def find_overlaps(lines):
 
       for key_line in lines:
 
-        # if key have already been used we skip
-        # or if it is the same key we skip
+        # if key have already been used we continue
+        # or if it is the same key we continue
         if key_line in keys_already_used or key_line == key_to_loop:
           continue
 
-        # get the key of the line
+        # get the second tuple
         l2 = lines[key_line]
 
         # if the l1 and l2 overlap, we add it inside the output list
