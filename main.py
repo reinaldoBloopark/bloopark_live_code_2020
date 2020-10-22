@@ -9,9 +9,12 @@ def overlap(l1, l2):
       If one line starts in the same point that the other ends is considered
       overlapping.
     """
-    pass
-
-
+    # Check if l2 lies within l1
+    if min(l1) <= min(l2) and max(l1) >= max(l2):
+      return True
+    # return if l1 lies within or itersects with l2
+    return (l1[0] >= min(l2) and l1[0] <= max(l2)) or (l1[1] >= min(l2) and l1[1] <= max(l2))
+       
 def find_overlaps(lines):
     """
     From a dictionary of lines determines pairs of overlapped lines
@@ -30,4 +33,14 @@ def find_overlaps(lines):
         }
         output => [('A', 'B'), ('A', 'D'), ('B', 'D')]
     """
-    pass
+    output = list()
+    keys = list(lines)
+    # sort the keys as dict is unordered
+    keys.sort()
+    for i in range(len(keys)):
+      # Need to check first with only rest of the items
+      # and so on...
+      for j in range(i+1, len(keys)):
+        if overlap(lines[keys[i]], lines[keys[j]]):
+          output.append(tuple((keys[i], keys[j])))
+    return output
