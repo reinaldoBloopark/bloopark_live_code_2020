@@ -1,3 +1,5 @@
+from itertools import combinations
+
 def overlap(l1, l2):
     """
     Evaluate if two lines (x1,x2) and (x3,x4) on the x-axis overlaps
@@ -37,10 +39,14 @@ def find_overlaps(lines):
     keys = list(lines)
     # sort the keys as dict is unordered
     keys.sort()
-    for i in range(len(keys)):
-      # Need to check first with only rest of the items
-      # and so on...
-      for j in range(i+1, len(keys)):
-        if overlap(lines[keys[i]], lines[keys[j]]):
-          output.append(tuple((keys[i], keys[j])))
+    comb = combinations(keys, 2)
+    for i in list(comb):
+      if overlap(lines[i[0]], lines[i[1]]):
+        output.append(i)
+    # for i in range(len(keys)):
+    #   # Need to check first with only rest of the items
+    #   # and so on...
+    #   for j in range(i+1, len(keys)):
+    #     if overlap(lines[keys[i]], lines[keys[j]]):
+    #       output.append(tuple((keys[i], keys[j])))
     return output
