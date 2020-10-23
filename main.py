@@ -8,8 +8,17 @@ def overlap(l1, l2):
       If the two lines overlaps returns True, otherwise returns False.
       If one line starts in the same point that the other ends is considered
       overlapping.
-    """
-    pass
+    """    
+    start1 = l1[0]
+    end1 = l1[1]   
+    
+    start2 = l2[0]
+    end2 = l2[1]
+        
+    if (start1 >= start2 and start1 <= end2) or (end1 >= start2 and end1 <= end2) or (start1 <= start2 and end1 >= end2):
+        return True
+    else:
+        return False
 
 
 def find_overlaps(lines):
@@ -30,4 +39,26 @@ def find_overlaps(lines):
         }
         output => [('A', 'B'), ('A', 'D'), ('B', 'D')]
     """
-    pass
+    from itertools import combinations 
+    line_keys = list(combinations(lines, 2))
+    res = [] 
+    for ky in line_keys:        
+        l1 = lines[ky[0]]
+        l2 = lines[ky[1]]
+        if overlap(l1, l2):
+            res.append(ky)
+    return res
+
+a = { 
+        'A': (3, 6),
+        'B': (1, 8),
+        'C': (15, 11),
+        'D': (6, 9),
+        #'E': (16, 9),
+        #'F': (11, 9),
+        #'G': (12, 20),
+        #'H': (2, 10),
+        #'I': (21, 22),
+    }
+
+print ("Res", find_overlaps(a))
