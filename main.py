@@ -15,6 +15,16 @@ def overlap(l1, l2):
     start2 = l2[0]
     end2 = l2[1]
         
+    if (start2 <= start1 <= end2) or \
+        (start2 <= end1 <= end2) or \
+        (start1 <= start2 <= end1) or \
+        (start1 <= end2 <= end1):
+        pass
+        #return True
+    else:
+        pass
+        #return False
+        
     if (start1 >= start2 and start1 <= end2) or (end1 >= start2 and end1 <= end2) or (start1 <= start2 and end1 >= end2):
         return True
     else:
